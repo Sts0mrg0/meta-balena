@@ -27,7 +27,7 @@ fi
 
 REGISTRY_ENDPOINT=$(jq -e -r "${REGISTRY_ENDPOINT_KEY}" < "${CONFIG_JSON}")
 CERT_DIR="/mnt/state/root-overlay/etc/docker/certs.d/${REGISTRY_ENDPOINT}"
-if [ -z "${CERT_DIR}" ]; then
+if [ ! -d "${CERT_DIR}" ]; then
   info "Installing custom CA from config.json for the engine"
   mkdir -p "${CERT_DIR}"
   CERT_FILE="${CERT_DIR}/ca.crt"
